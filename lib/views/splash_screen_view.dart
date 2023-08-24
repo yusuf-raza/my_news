@@ -37,16 +37,16 @@ class _SplashScreenViewState extends State<SplashScreenView> {
               width: width,
               child: Center(
                 child: Text(
-                  "Top Headlines",
-                  style: GoogleFonts.aboreto(
-                      letterSpacing: .6, color: Colors.blue, fontSize: 24),
+                  "Top Football News",
+                  style: GoogleFonts.acme(
+                      letterSpacing: .6, color: Colors.green, fontSize: 30),
                 ),
               ),
             ),
             SizedBox(
               width: width,
               child: const SpinKitThreeInOut(
-                color: Colors.blue,
+                color: Colors.green,
                 size: 25,
               ),
             ),
