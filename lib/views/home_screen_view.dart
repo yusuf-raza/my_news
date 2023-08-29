@@ -1,14 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/components/home_screen_headline_card.dart';
 import 'package:news_app/models/HeadlinesModel.dart';
 import 'package:news_app/utils/utils.dart';
 import 'package:news_app/view%20model/headline_view_model.dart';
 
-enum FilterList {
+enum PopUpMenuItemList {
   bbcSports,
   bleacherReport,
   footballItalia,
@@ -16,26 +14,33 @@ enum FilterList {
   talkSport,
   theSportBible
 }
-/*
-bbc-sport
-bleacher-report
-football-italia
-fox-sports
-talksport
-the-sport-bible
-*/
 
-class HomeScreenView extends StatelessWidget {
+class HomeScreenView extends StatefulWidget {
   const HomeScreenView({super.key});
 
   @override
+  State<HomeScreenView> createState() => _HomeScreenViewState();
+}
+
+class _HomeScreenViewState extends State<HomeScreenView> {
+  late HeadlinesViewModel headlinesViewModel;
+  String source = 'the-sport-bible';
+  var future;
+  Utils utils = Utils();
+
+  @override
+  void initState() {
+    super.initState();
+    headlinesViewModel = HeadlinesViewModel();
+    future = headlinesViewModel.fetchNewsHeadlineApi(source);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String source = '';
-
-    Utils utils = Utils();
-
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
+
+    PopUpMenuItemList? selectedItem;
 
     return Scaffold(
         appBar: AppBar(
@@ -49,58 +54,63 @@ class HomeScreenView extends StatelessWidget {
                 width: 20,
               )),
           actions: [
-            PopupMenuButton<FilterList>(
+            PopupMenuButton<PopUpMenuItemList>(
                 icon: const Icon(Icons.more_vert),
-                initialValue: FilterList.theSportBible,
-                onSelected: (FilterList item) {
-                  if (item.name == FilterList.bbcSports.name) {
+                initialValue: selectedItem,
+                onSelected: (PopUpMenuItemList item) {
+                  if (item.name == PopUpMenuItemList.bbcSports.name) {
                     source = 'bbc-sport';
                   }
-                  if (FilterList.bleacherReport.name == item.name) {
+                  if (item.name == PopUpMenuItemList.bleacherReport.name) {
                     source = "bleacher-report";
                   }
-                  if (item.name == FilterList.footballItalia.name) {
+                  if (item.name == PopUpMenuItemList.footballItalia.name) {
                     source = "football-italia";
                   }
-                  if (item.name == FilterList.foxSports.name) {
+                  if (item.name == PopUpMenuItemList.foxSports.name) {
                     source = "fox-sports";
                   }
-                  if (item.name == FilterList.talkSport.name) {
+                  if (item.name == PopUpMenuItemList.talkSport.name) {
                     source = "talksport";
                   }
-                  if (item.name == FilterList.theSportBible.name) {
+                  if (item.name == PopUpMenuItemList.theSportBible.name) {
                     source = "the-sport-bible";
                   }
-                  HeadlinesViewModelProvider().fetchNewsHeadlineApi();
+
+                  setState(() {
+                    selectedItem = item;
+                  });
+
+                  headlinesViewModel.fetchNewsHeadlineApi(source);
                 },
                 elevation: 2,
                 color: Colors.black54,
-                itemBuilder: (context) => <PopupMenuEntry<FilterList>>[
-                      const PopupMenuItem<FilterList>(
-                        value: FilterList.theSportBible,
+                itemBuilder: (context) => <PopupMenuEntry<PopUpMenuItemList>>[
+                      const PopupMenuItem<PopUpMenuItemList>(
+                        value: PopUpMenuItemList.theSportBible,
                         child: Text("The Sports Bible",
                             style: TextStyle(color: Colors.white)),
                       ),
-                      const PopupMenuItem<FilterList>(
-                          value: FilterList.footballItalia,
+                      const PopupMenuItem<PopUpMenuItemList>(
+                          value: PopUpMenuItemList.footballItalia,
                           child: Text(
                             "Football Italia",
                             style: TextStyle(color: Colors.white),
                           )),
-                      const PopupMenuItem<FilterList>(
-                          value: FilterList.bleacherReport,
+                      const PopupMenuItem<PopUpMenuItemList>(
+                          value: PopUpMenuItemList.bleacherReport,
                           child: Text("Bleacher Report",
                               style: TextStyle(color: Colors.white))),
-                      const PopupMenuItem<FilterList>(
-                          value: FilterList.bbcSports,
+                      const PopupMenuItem<PopUpMenuItemList>(
+                          value: PopUpMenuItemList.bbcSports,
                           child: Text("BBC Sports",
                               style: TextStyle(color: Colors.white))),
-                      const PopupMenuItem<FilterList>(
-                          value: FilterList.foxSports,
+                      const PopupMenuItem<PopUpMenuItemList>(
+                          value: PopUpMenuItemList.foxSports,
                           child: Text("FOX Sports",
                               style: TextStyle(color: Colors.white))),
-                      const PopupMenuItem<FilterList>(
-                          value: FilterList.talkSport,
+                      const PopupMenuItem<PopUpMenuItemList>(
+                          value: PopUpMenuItemList.talkSport,
                           child: Text("Talksport",
                               style: TextStyle(color: Colors.white))),
                     ])
@@ -113,7 +123,7 @@ class HomeScreenView extends StatelessWidget {
               height: height * .6,
               width: width * 1,
               child: FutureBuilder<HeadlinesModel>(
-                  future: HeadlinesViewModelProvider().fetchNewsHeadlineApi(),
+                  future: future,
                   builder: (BuildContext context,
                       AsyncSnapshot<HeadlinesModel> snapshot) {
                     if (!snapshot.hasData) {
@@ -128,7 +138,6 @@ class HomeScreenView extends StatelessWidget {
                           itemCount: articlesData!.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            print(articlesData[index]!.urlToImage.toString());
                             return HomeScreenHeadlineCard(
                                 imageUrl:
                                     articlesData[index]!.urlToImage.toString(),

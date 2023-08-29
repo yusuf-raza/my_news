@@ -31,10 +31,21 @@ class HomeScreenHeadlineCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: imageUrl != null
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                placeholder: (context, url) => utils.customSpinKitMedium(),
+                errorWidget: (context, url, error) =>
+                    Image.asset('image_not_found.png'),
+                fit: BoxFit.cover,
+                width: width * .9,
+                height: height * .6,
+                alignment: Alignment.center,
+              )
+
+              /* imageUrl.isNotEmpty || imageUrl != null
                 ? CachedNetworkImage(
-                    imageUrl: imageUrl!,
+                    imageUrl: imageUrl,
                     placeholder: (context, url) => utils.customSpinKitMedium(),
                     errorWidget: (context, url, error) =>
                         Image.asset('image_not_found.png'),
@@ -52,8 +63,8 @@ class HomeScreenHeadlineCard extends StatelessWidget {
                       color: Colors.red,
                       child: SizedBox(height:50,width:50,child: Image.asset('images/image_not_found.png')),
                     ),
-                  ),
-          ),
+                  ),*/
+              ),
         ),
         Positioned(
           bottom: 20,
