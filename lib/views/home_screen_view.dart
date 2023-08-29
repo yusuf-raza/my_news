@@ -79,6 +79,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
                   setState(() {
                     selectedItem = item;
+                    future = headlinesViewModel.fetchNewsHeadlineApi(source);
                   });
 
                   headlinesViewModel.fetchNewsHeadlineApi(source);

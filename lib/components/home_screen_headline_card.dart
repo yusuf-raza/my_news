@@ -36,7 +36,7 @@ class HomeScreenHeadlineCard extends StatelessWidget {
                 imageUrl: imageUrl,
                 placeholder: (context, url) => utils.customSpinKitMedium(),
                 errorWidget: (context, url, error) =>
-                    Image.asset('image_not_found.png'),
+                    const Center(child: Text("no image :(", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),)),
                 fit: BoxFit.cover,
                 width: width * .9,
                 height: height * .6,
