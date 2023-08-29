@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/components/home_screen_headline_card.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
@@ -27,6 +28,35 @@ class Utils {
       trackColor: Colors.blue,
       color: Colors.orange,
       size: 50,
+    );
+  }
+
+  Widget customSpinKitSplashScreen(){
+    return const SpinKitThreeInOut(
+      color: Colors.blue,
+      size: 25,
+    );
+  }
+
+  Widget customShimmer(double width, double height){
+    return Shimmer.fromColors(
+      baseColor: Colors.white!,
+      highlightColor: Colors.blue.shade100!,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          child: HomeScreenHeadlineCard(
+            imageUrl: '', // Empty URL for shimmer effect
+            width: width,
+            height: height,
+            title: '',
+            source: '',
+            publishedDate: '',
+            url: '',
+          ),
+        ),
+      ),
     );
   }
 

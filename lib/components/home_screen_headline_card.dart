@@ -35,36 +35,17 @@ class HomeScreenHeadlineCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
                 placeholder: (context, url) => utils.customSpinKitMedium(),
-                errorWidget: (context, url, error) =>
-                    const Center(child: Text("no image :(", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),)),
+                errorWidget: (context, url, error) => const Center(
+                    child: Text(
+                  "no image :(",
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                )),
                 fit: BoxFit.cover,
                 width: width * .9,
                 height: height * .6,
                 alignment: Alignment.center,
-              )
-
-              /* imageUrl.isNotEmpty || imageUrl != null
-                ? CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    placeholder: (context, url) => utils.customSpinKitMedium(),
-                    errorWidget: (context, url, error) =>
-                        Image.asset('image_not_found.png'),
-                    fit: BoxFit.cover,
-                    width: width * .9,
-                    height: height * .6,
-                    alignment: Alignment.center,
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      height: height * .6,
-                      width: width * .9,
-                      color: Colors.red,
-                      child: SizedBox(height:50,width:50,child: Image.asset('images/image_not_found.png')),
-                    ),
-                  ),*/
-              ),
+              )),
         ),
         Positioned(
           bottom: 20,
@@ -108,14 +89,14 @@ class HomeScreenHeadlineCard extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  Utils().launchURL(url);
+                                  utils.launchURL(url);
                                 },
                                 icon: const Icon(
                                   Icons.link,
                                   color: Colors.blue,
                                 )),
                             Text(
-                              Utils().formatDate(publishedDate),
+                             utils.formatDate(publishedDate),
                               style: GoogleFonts.abel(
                                 fontSize: 15,
                                 color: Colors.blue,

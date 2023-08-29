@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:news_app/components/home_screen_headline_card.dart';
+import 'package:news_app/components/text_form_field.dart';
 import 'package:news_app/models/HeadlinesModel.dart';
 import 'package:news_app/utils/utils.dart';
 import 'package:news_app/view%20model/headline_view_model.dart';
@@ -43,11 +42,23 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     PopUpMenuItemList? selectedItem;
 
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) => const PaddingTextFieldForm());
+          },
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.search),
+        ),
         appBar: AppBar(
           title: const Text("My News"),
           centerTitle: true,
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, 'categoryScreen');
+              },
               icon: Image.asset(
                 "images/category_icon.png",
                 height: 20,
@@ -128,11 +139,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   builder: (BuildContext context,
                       AsyncSnapshot<HeadlinesModel> snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          child: utils.customSpinKitLarge(),
-                        ),
-                      );
+                      return utils.customShimmer(width, height);
                     } else {
                       var articlesData = snapshot.data!.articles;
                       return ListView.builder(

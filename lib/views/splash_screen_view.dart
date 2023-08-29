@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/utils/routes.dart';
+import 'package:news_app/utils/utils.dart';
 import 'package:news_app/views/home_screen_view.dart';
 
 class SplashScreenView extends StatefulWidget {
@@ -14,7 +15,17 @@ class SplashScreenView extends StatefulWidget {
 
 class _SplashScreenViewState extends State<SplashScreenView> {
   @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, 'homeScreen');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Utils utils = Utils();
+
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
 
@@ -29,7 +40,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
                 child: SizedBox(
               height: height * .5,
               child: Image.asset(
-                "images/splash_icon.png",
+                "images/splash_icon.gif",
                 fit: BoxFit.cover,
               ),
             )),
@@ -37,31 +48,19 @@ class _SplashScreenViewState extends State<SplashScreenView> {
               width: width,
               child: Center(
                 child: Text(
-                  "Top Football News",
+                  "My News App",
                   style: GoogleFonts.acme(
-                      letterSpacing: .6, color: Colors.green, fontSize: 30),
+                      letterSpacing: .6, color: Colors.blue, fontSize: 30),
                 ),
               ),
             ),
             SizedBox(
               width: width,
-              child: const SpinKitThreeInOut(
-                color: Colors.green,
-                size: 25,
-              ),
+              child: utils.customSpinKitSplashScreen(),
             ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const HomeScreenView()));
-    });
   }
 }
