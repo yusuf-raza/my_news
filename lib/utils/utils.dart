@@ -78,4 +78,12 @@ class Utils {
       throw 'Could not launch $url';
     }
   }
+
+
+  String? validateInput(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'This field cannot be empty';
+    }
+    return null;
+  }
 }

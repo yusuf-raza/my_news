@@ -9,7 +9,6 @@ class CategoryScreenView extends StatelessWidget {
       appBar:  AppBar(
         title: const Text("Categories"),
         centerTitle: true,
-
       ),
     );
   }

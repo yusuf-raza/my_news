@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:news_app/components/home_screen_headline_card.dart';
 import 'package:news_app/components/text_form_field.dart';
-import 'package:news_app/models/HeadlinesModel.dart';
+import 'package:news_app/models/headlines_model.dart';
+import 'package:news_app/utils/route_names.dart';
 import 'package:news_app/utils/utils.dart';
 import 'package:news_app/view%20model/headline_view_model.dart';
 
@@ -46,7 +48,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
           onPressed: () {
             showModalBottomSheet(
                 context: context,
-                builder: (context) => const PaddingTextFieldForm());
+                builder: (context) => const TopicForm());
           },
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
@@ -57,7 +59,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
           centerTitle: true,
           leading: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'categoryScreen');
+                GoRouter.of(context).pushNamed(RouteNames.categoryViewScreen);
               },
               icon: Image.asset(
                 "images/category_icon.png",

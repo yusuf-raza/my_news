@@ -1,4 +1,4 @@
-import 'package:news_app/models/HeadlinesModel.dart';
+import 'package:news_app/models/headlines_model.dart';
 import 'package:news_app/repositories/headlines_repository.dart';
 
 class HeadlinesViewModel {

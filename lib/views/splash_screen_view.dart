@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/utils/routes.dart';
+import 'package:news_app/utils/route_names.dart';
 import 'package:news_app/utils/utils.dart';
-import 'package:news_app/views/home_screen_view.dart';
 
 class SplashScreenView extends StatefulWidget {
   const SplashScreenView({super.key});
@@ -18,7 +18,11 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, 'homeScreen');
+      GoRouter.of(context).go('/homeScreen');
+      GoRouter.of(context).goNamed(RouteNames.homeScreen);
+
+     // GoRouter.of(context).pushReplacementNamed('/homeScreen');
+      //Navigator.pushReplacementNamed(context, 'homeScreen');
     });
   }
 
