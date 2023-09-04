@@ -9,11 +9,13 @@ import 'package:news_app/view%20model/headline_view_model.dart';
 
 enum PopUpMenuItemList {
   bbcSports,
-  bleacherReport,
-  footballItalia,
-  foxSports,
+  buzzfeed,
+  cnn,
+  entertainmentWeekly,
   talkSport,
-  theSportBible
+  theSportBible,
+  aryNews,
+  googleNews
 }
 
 class HomeScreenView extends StatefulWidget {
@@ -74,20 +76,25 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   if (item.name == PopUpMenuItemList.bbcSports.name) {
                     source = 'bbc-sport';
                   }
-                  if (item.name == PopUpMenuItemList.bleacherReport.name) {
-                    source = "bleacher-report";
+                  if (item.name == PopUpMenuItemList.buzzfeed.name) {
+                    source = "buzzfeed";
                   }
-                  if (item.name == PopUpMenuItemList.footballItalia.name) {
-                    source = "football-italia";
+                  if (item.name == PopUpMenuItemList.googleNews.name) {
+                    source = "google-news";
                   }
-                  if (item.name == PopUpMenuItemList.foxSports.name) {
-                    source = "fox-sports";
+                  if (item.name == PopUpMenuItemList.cnn.name) {
+                    source = "cnn";
+                  }
+                  if (item.name == PopUpMenuItemList.entertainmentWeekly.name) {
+                    source = "entertainment-weekly";
                   }
                   if (item.name == PopUpMenuItemList.talkSport.name) {
                     source = "talksport";
                   }
                   if (item.name == PopUpMenuItemList.theSportBible.name) {
                     source = "the-sport-bible";
+                  } if (item.name == PopUpMenuItemList.aryNews.name) {
+                    source = "ary-news";
                   }
 
                   setState(() {
@@ -106,27 +113,35 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                             style: TextStyle(color: Colors.white)),
                       ),
                       const PopupMenuItem<PopUpMenuItemList>(
-                          value: PopUpMenuItemList.footballItalia,
+                          value: PopUpMenuItemList.cnn,
                           child: Text(
-                            "Football Italia",
+                            "CNN",
                             style: TextStyle(color: Colors.white),
                           )),
                       const PopupMenuItem<PopUpMenuItemList>(
-                          value: PopUpMenuItemList.bleacherReport,
-                          child: Text("Bleacher Report",
+                          value: PopUpMenuItemList.buzzfeed,
+                          child: Text("Buzzfeed",
                               style: TextStyle(color: Colors.white))),
                       const PopupMenuItem<PopUpMenuItemList>(
                           value: PopUpMenuItemList.bbcSports,
                           child: Text("BBC Sports",
                               style: TextStyle(color: Colors.white))),
+                  const PopupMenuItem<PopUpMenuItemList>(
+                      value: PopUpMenuItemList.googleNews,
+                      child: Text("Google News",
+                          style: TextStyle(color: Colors.white))),
                       const PopupMenuItem<PopUpMenuItemList>(
-                          value: PopUpMenuItemList.foxSports,
-                          child: Text("FOX Sports",
+                          value: PopUpMenuItemList.entertainmentWeekly,
+                          child: Text("Entertainment Weekly",
                               style: TextStyle(color: Colors.white))),
                       const PopupMenuItem<PopUpMenuItemList>(
                           value: PopUpMenuItemList.talkSport,
                           child: Text("Talksport",
                               style: TextStyle(color: Colors.white))),
+                  const PopupMenuItem<PopUpMenuItemList>(
+                      value: PopUpMenuItemList.aryNews,
+                      child: Text("ARY News",
+                          style: TextStyle(color: Colors.white))),
                     ])
           ],
         ),

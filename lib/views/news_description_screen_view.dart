@@ -9,54 +9,57 @@ class NewsDescriptionScreenView extends StatelessWidget {
       required this.publishedAt,
       required this.author,
       required this.content,
-      required this.imageUrl});
+      required this.imageUrl, required this.title});
 
   final String source;
   final String publishedAt;
   final String author;
   final String content;
   final String imageUrl;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
 
     Utils utils = Utils();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("News app"),
-        centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Container(
-          decoration: const BoxDecoration(color: Colors.blue),
-          child: Column(
-            children: [
-              // Stack(
-              //   children: [
-              //     Container(
-              //       decoration: const BoxDecoration(color: Colors.black12),
-              //       height: height * .3,
-              //       width: width * 8,
-              //       child: Center(child: CachedNetworkImage(imageUrl: imageUrl.toString())),
-              //     ),
-              //     Positioned(left: 10, bottom: 10, child: Text(source)),
-              //     Positioned(bottom: 10, right: 10, child: Text(publishedAt))
-              //   ],
-              // ),
-              // Container(
-              //   decoration: const BoxDecoration(color: Colors.purple),
-              //   width: width * 8,
-              //   child: Center(child: Text(content)),
-              // ),
-              Text("CONTENT "+content),
-              Text("AUTHOR "+author),
-              Text("PUBLISHED AT "+publishedAt),
-              Text("SOURCE "+source),
-              Text("IMAGE URL"+imageUrl)
-            ],
+          padding: const EdgeInsets.all(10),
+          decoration:  BoxDecoration(
+              border:Border.all(color: Colors.black12),
+              borderRadius: const BorderRadius.all(Radius.circular(10))
+          ),
+          child: SizedBox(
+            width: width * .9,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: height * .3,
+                  child: CachedNetworkImage(imageUrl: imageUrl.toString(),fit: BoxFit.cover,),
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(source),
+                    Text(utils.formatDate(publishedAt))
+                  ],
+                ),
+                const SizedBox(height: 5,),
+
+                Text(title, style: const TextStyle(fontSize: 18),),
+                const SizedBox(height: 5,),
+
+                Center(child: Text(content,maxLines: 40,)),
+              ],
+            ),
           ),
         ),
       ),

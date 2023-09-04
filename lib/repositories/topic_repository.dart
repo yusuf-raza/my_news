@@ -9,7 +9,7 @@ class TopicRepository {
     String apiKey = '67d99427b3944319834fc8c10e56f5df';
     String apiKeyTwo = "8762c3f5ccad46df8a28aec005f44d3a";
     String url =
-        'https://newsapi.org/v2/everything?q=$topicName&lng=en&apiKey=$apiKeyTwo';
+        'https://newsapi.org/v2/everything?q=$topicName&language=en&apiKey=$apiKeyTwo';
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);

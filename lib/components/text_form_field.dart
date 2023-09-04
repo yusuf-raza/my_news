@@ -66,8 +66,7 @@ class _TopicFormState extends State<TopicForm> {
                   if (_formKey.currentState!.validate()) {
                     GoRouter.of(context).pop();
                     String topicForNews = _controller.text;
-                    //GoRouter.of(context).go('/topicalNewsScreen/$topicForNews');
-                    GoRouter.of(context).goNamed(RouteNames.topicalNewsScreen, pathParameters: { 'topicForNews' : topicForNews});
+                    GoRouter.of(context).pushNamed(RouteNames.topicalNewsScreen, pathParameters: { 'topicForNews' : topicForNews});
                   }
                 },
                 child: const Text(

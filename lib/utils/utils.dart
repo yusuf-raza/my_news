@@ -40,8 +40,8 @@ class Utils {
 
   Widget customShimmer(double width, double height){
     return Shimmer.fromColors(
-      baseColor: Colors.white!,
-      highlightColor: Colors.blue.shade100!,
+      baseColor: Colors.white,
+      highlightColor: Colors.blue.shade100,
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Container(
@@ -52,7 +52,7 @@ class Utils {
             height: height,
             title: '',
             source: '',
-            publishedDate: '',
+            publishedDate: DateTime.now().toString(),
             url: '',
           ),
         ),

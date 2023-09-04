@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       routerConfig: _goRouter,
       title: 'My News App',
       theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -53,13 +54,14 @@ class MyApp extends StatelessWidget {
                 topicForNews: state.pathParameters["topicForNews"]!)),
     GoRoute(
         name: RouteNames.newsDescriptionScreen,
-        path: '/newsDescriptionScreen/:source/:publishedAt/:author/:content/:imageUrl',
+        path: '/newsDescriptionScreen/:source/:publishedAt/:author/:content/:imageUrl/:title',
         builder: (BuildContext context, GoRouterState state) =>
             NewsDescriptionScreenView(
                 source: state.pathParameters['source']!,
                 publishedAt: state.pathParameters['publishedAt']!,
                 author: state.pathParameters['author']!,
                 content: state.pathParameters['content']!,
-                imageUrl: state.pathParameters['imageUrl']!))
+                imageUrl: state.pathParameters['imageUrl']!,
+              title: state.pathParameters['title']!,))
   ]);
 }

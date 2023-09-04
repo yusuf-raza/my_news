@@ -82,6 +82,8 @@ class TopicScreenNewsCard extends StatelessWidget {
                         )),
                   ),
                    InkWell(onTap:(){
+
+                     print('VALUES BEFORE: $source $publishedAt $author $content $imageUrl');
                      GoRouter.of(context).pushNamed(
                          RouteNames.newsDescriptionScreen,
                          pathParameters: {
@@ -90,6 +92,7 @@ class TopicScreenNewsCard extends StatelessWidget {
                            "author":author,
                            "content":content,
                            "imageUrl":imageUrl,
+                           "title": title
                      });
                    },child: const Text("Read more...", style: TextStyle(color: Colors.blue),))
                 ],
@@ -101,19 +104,4 @@ class TopicScreenNewsCard extends StatelessWidget {
     );
   }
 
-}
-class NewsDescriptionScreenArguments {
-  final String source;
-  final String publishedAt;
-  final String author;
-  final String content;
-  final String imageUrl;
-
-  NewsDescriptionScreenArguments({
-    required this.source,
-    required this.publishedAt,
-    required this.author,
-    required this.content,
-    required this.imageUrl,
-  });
 }

@@ -18,7 +18,7 @@ class TopicalNewsViewScreen extends StatefulWidget {
 class _TopicalNewsViewScreenState extends State<TopicalNewsViewScreen> {
   late TopicsViewModel topicsViewModel;
 
-  var future;
+  late Future<NewsByTopicModel> future;
   Utils utils = Utils();
 
 
