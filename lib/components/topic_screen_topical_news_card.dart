@@ -59,7 +59,7 @@ class TopicScreenNewsCard extends StatelessWidget {
           bottom: 5,
           child: Card(
             child: Container(
-              height: height * 0.1,
+              height: height * 0.12,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white),
@@ -82,8 +82,6 @@ class TopicScreenNewsCard extends StatelessWidget {
                         )),
                   ),
                    InkWell(onTap:(){
-
-                     print('VALUES BEFORE: $source $publishedAt $author $content $imageUrl');
                      GoRouter.of(context).pushNamed(
                          RouteNames.newsDescriptionScreen,
                          pathParameters: {
@@ -94,7 +92,10 @@ class TopicScreenNewsCard extends StatelessWidget {
                            "imageUrl":imageUrl,
                            "title": title
                      });
-                   },child: const Text("Read more...", style: TextStyle(color: Colors.blue),))
+                   },child: const Padding(
+                     padding: EdgeInsets.all(8.0),
+                     child: Text("Read more...", style: TextStyle(color: Colors.blue),),
+                   ))
                 ],
               ),
             ),
