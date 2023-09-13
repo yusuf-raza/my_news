@@ -32,7 +32,7 @@ class HomeScreenView extends StatefulWidget {
 class _HomeScreenViewState extends State<HomeScreenView> {
   late HeadlinesViewModel headlinesViewModel;
   String source = 'the-sport-bible';
-  var future;
+  late Future<HeadlinesModel> future;
   Utils utils = Utils();
 
   @override
