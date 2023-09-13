@@ -1,20 +1,22 @@
+import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/utils/route_names.dart';
 import 'package:news_app/utils/utils.dart';
+import 'package:news_app/views/news_description_screen_view.dart';
 
 class TopicScreenNewsCard extends StatelessWidget {
   const TopicScreenNewsCard(
       {super.key,
-        required this.imageUrl,
-        required this.width,
-        required this.height,
-        required this.title,
-        required this.source,
-        required this.publishedAt,
-        required this.url, required this.content, required this.author});
+      required this.imageUrl,
+      required this.width,
+      required this.height,
+      required this.title,
+      required this.source,
+      required this.publishedAt,
+      required this.url,
+      required this.content,
+      required this.author});
 
   final String imageUrl;
   final double width;
@@ -45,10 +47,10 @@ class TopicScreenNewsCard extends StatelessWidget {
                 placeholder: (context, url) => utils.customSpinKitMedium(),
                 errorWidget: (context, url, error) => const Center(
                     child: Text(
-                      "no image :(",
-                      style:
+                  "no image :(",
+                  style:
                       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                    )),
+                )),
                 fit: BoxFit.cover,
                 width: width * .9,
                 height: height * .5,
@@ -61,8 +63,7 @@ class TopicScreenNewsCard extends StatelessWidget {
             child: Container(
               height: height * 0.12,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white),
+                  borderRadius: BorderRadius.circular(10), color: Colors.white),
               alignment: Alignment.bottomCenter,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -81,21 +82,33 @@ class TopicScreenNewsCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         )),
                   ),
-                   InkWell(onTap:(){
-                     GoRouter.of(context).pushNamed(
-                         RouteNames.newsDescriptionScreen,
-                         pathParameters: {
-                           "source" : source,
-                           "publishedAt":publishedAt,
-                           "author":author,
-                           "content":content,
-                           "imageUrl":imageUrl,
-                           "title": title
-                     });
-                   },child: const Padding(
-                     padding: EdgeInsets.all(8.0),
-                     child: Text("Read more...", style: TextStyle(color: Colors.blue),),
-                   ))
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    //using open container for container fade animation
+                    child: OpenContainer(
+                      closedColor: Colors.blue,
+                      transitionType: ContainerTransitionType.fade,
+                      tappable: true,
+                      closedBuilder:
+                          (BuildContext context, void Function() action) => const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                        "Read more",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                          ),
+                      openBuilder: (BuildContext context,
+                              void Function({Object? returnValue})
+                                  action) =>
+                          NewsDescriptionScreenView(
+                              source: source,
+                              publishedAt: publishedAt,
+                              author: author,
+                              content: content,
+                              imageUrl: imageUrl,
+                              title: title),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -104,5 +117,4 @@ class TopicScreenNewsCard extends StatelessWidget {
       ],
     );
   }
-
 }

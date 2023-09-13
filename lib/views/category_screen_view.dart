@@ -89,7 +89,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                               width: width,
                               height: height,
                               title: articlesData[index].title.toString(),
-                              source: articlesData[index].source.toString(),
+                              source: articlesData[index].source!.name.toString(),
                               publishedAt:
                                   articlesData[index].publishedAt.toString(),
                               url: articlesData[index].url.toString(),

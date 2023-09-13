@@ -1,7 +1,9 @@
+import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/utils.dart';
+import 'package:news_app/views/news_description_screen_view.dart';
 
 class HomeScreenHeadlineCard extends StatelessWidget {
   const HomeScreenHeadlineCard(
@@ -11,16 +13,18 @@ class HomeScreenHeadlineCard extends StatelessWidget {
       required this.height,
       required this.title,
       required this.source,
-      required this.publishedDate,
-      required this.url});
+      required this.publishedAt,
+      required this.url, required this.author, required this.content});
 
   final String imageUrl;
   final double width;
   final double height;
   final String title;
   final String source;
-  final String publishedDate;
+  final String publishedAt;
   final String url;
+  final String author;
+  final String content;
 
   @override
   Widget build(BuildContext context) {
@@ -87,16 +91,21 @@ class HomeScreenHeadlineCard extends StatelessWidget {
                               style: GoogleFonts.abel(
                                   fontSize: 15, color: Colors.blue),
                             ),
-                            IconButton(
-                                onPressed: () {
-                                  utils.launchURL(url);
-                                },
-                                icon: const Icon(
-                                  Icons.link,
-                                  color: Colors.blue,
-                                )),
+                            OpenContainer(
+                              closedElevation: 0,
+                              transitionType: ContainerTransitionType.fade,
+                                tappable: true,
+                                closedBuilder: (BuildContext context, void Function() action) => const Text("Read more", style: TextStyle(color: Colors.blue),),
+                                openBuilder: (BuildContext context, void Function() action) => NewsDescriptionScreenView(
+                                    source: source,
+                                    publishedAt: publishedAt,
+                                    author: author,
+                                    content: content,
+                                    imageUrl: imageUrl,
+                                    title: title),
+                            ),
                             Text(
-                             utils.formatDate(publishedDate),
+                             utils.formatDate(publishedAt),
                               style: GoogleFonts.abel(
                                 fontSize: 15,
                                 color: Colors.blue,

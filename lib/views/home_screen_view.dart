@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app/components/home_screen_headline_card.dart';
@@ -23,6 +24,9 @@ class HomeScreenView extends StatefulWidget {
 
   @override
   State<HomeScreenView> createState() => _HomeScreenViewState();
+
+  final ContainerTransitionType _transitionType = ContainerTransitionType.fade;
+
 }
 
 class _HomeScreenViewState extends State<HomeScreenView> {
@@ -46,6 +50,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     PopUpMenuItemList? selectedItem;
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
@@ -53,6 +58,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 builder: (context) => const TopicForm());
           },
           backgroundColor: Colors.blue,
+
           foregroundColor: Colors.white,
           child: const Icon(Icons.search),
         ),
@@ -164,6 +170,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return HomeScreenHeadlineCard(
+                              author: articlesData[index]!.author.toString(),
+                                content: articlesData[index]!.content.toString(),
                                 imageUrl:
                                     articlesData[index]!.urlToImage.toString(),
                                 width: width,
@@ -173,7 +181,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                     .source!
                                     .name
                                     .toString(),
-                                publishedDate:
+                                publishedAt:
                                     articlesData[index]!.publishedAt.toString(),
                                 url: articlesData[index]!.url.toString());
                           });
