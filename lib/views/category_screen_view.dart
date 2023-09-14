@@ -76,7 +76,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                 builder: (BuildContext context,
                     AsyncSnapshot<CategoryModel> snapshot) {
                   if (!snapshot.hasData) {
-                    return utils.customShimmer(width, height);
+                    return utils.customShimmerTwo(width, height);
                   } else {
                     var articlesData = snapshot.data!.articles;
                     return ListView.builder(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/components/category_list_chip.dart';
 import 'package:news_app/components/home_screen_headline_card.dart';
+import 'package:news_app/components/topic_screen_topical_news_card.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -59,6 +61,33 @@ class Utils {
           ),
         ),
       ),
+    );
+  }
+
+
+  Widget customShimmerTwo(double width, double height){
+    return ListView.builder(
+      itemCount: 10,
+      itemBuilder: (BuildContext context, int index) { return Shimmer.fromColors(
+        baseColor: Colors.white,
+        highlightColor: Colors.blue.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            child: TopicScreenNewsCard(
+                imageUrl: "",
+                width: width,
+                height: height,
+                title: "",
+                source: "",
+                publishedAt: "",
+                url:"",
+                content: "",
+                author: "")
+          ),
+        ),
+      );  },
     );
   }
 

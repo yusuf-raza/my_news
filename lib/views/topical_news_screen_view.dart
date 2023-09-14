@@ -50,7 +50,7 @@ class _TopicalNewsViewScreenState extends State<TopicalNewsViewScreen> {
                   builder: (BuildContext context,
                       AsyncSnapshot<NewsByTopicModel> snapshot) {
                     if (!snapshot.hasData) {
-                      return utils.customShimmer(width, height);
+                      return utils.customShimmerTwo(width, height);
                     } else {
                       var articlesData = snapshot.data!.articles;
                       return ListView.builder(
