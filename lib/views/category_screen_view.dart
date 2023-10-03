@@ -48,26 +48,29 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 50,
-            child: ListView.builder(
-                itemCount: categoryList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(3),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          future = categoryViewModel
-                              .fetchCategoryApi(categoryList[index].toString());
-                        });
-                      },
-                      child: CategoryListChip(
-                          categoryName: categoryList[index].toString()),
-                    ),
-                  );
-                }),
+          Center(
+            child: SizedBox(
+              width: width,
+              height: 50,
+              child: ListView.builder(
+                  itemCount: categoryList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            future = categoryViewModel
+                                .fetchCategoryApi(categoryList[index].toString());
+                          });
+                        },
+                        child: CategoryListChip(
+                            categoryName: categoryList[index].toString()),
+                      ),
+                    );
+                  }),
+            ),
           ),
           SizedBox(
             height: height * .8,
